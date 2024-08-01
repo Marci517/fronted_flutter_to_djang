@@ -8,10 +8,10 @@ class BookProvider with ChangeNotifier {
     fetchTasks();
   }
 
-  List<Book> _books = [];
+  List<Book> bookList = [];
 
   List<Book> get books {
-    return [..._books];
+    return bookList;
   }
 
   fetchTasks() async {
@@ -19,7 +19,8 @@ class BookProvider with ChangeNotifier {
     final response = await http.get(url);
     if (response.statusCode == 200) {
       var data = json.decode(response.body) as List;
-      _books = data.map<Book>((json) => Book.fromJson(json)).toList();
+      bookList = data.map<Book>((json) => Book.fromJson(json)).toList();
+      notifyListeners();
     }
   }
 }

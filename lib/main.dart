@@ -32,6 +32,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bookP = Provider.of<BookProvider>(context);
+    print(bookP);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Library system'),
@@ -40,8 +41,15 @@ class HomePage extends StatelessWidget {
           itemCount: bookP.books.length,
           itemBuilder: (BuildContext context, int index) {
             return ListTile(
-              title: Text(bookP.books[index].title),
-              subtitle: Text(bookP.books[index].description),
+              title: Text('Title ${bookP.books[index].title}'),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Description: ${bookP.books[index].description}'),
+                  Text('Category: ${bookP.books[index].category}'),
+                  Text('Author ID: ${bookP.books[index].author}'),
+                ],
+              ),
             );
           }),
     );
