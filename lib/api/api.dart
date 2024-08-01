@@ -15,7 +15,7 @@ class BookProvider with ChangeNotifier {
   }
 
   fetchTasks() async {
-    final url = Uri.parse('http:// 127.0.0.1:8000/books/apis/all/?format=json');
+    final url = Uri.parse('http://127.0.0.1:8000/books/apis/all/?format=json');
     final response = await http.get(url);
     if (response.statusCode == 200) {
       var data = json.decode(response.body) as List;
