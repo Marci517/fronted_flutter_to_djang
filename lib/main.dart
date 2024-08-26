@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fronted_to_djang/api/api.dart';
 import 'package:provider/provider.dart';
+import 'package:fronted_to_djang/search_by_name.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,16 +33,28 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bookP = Provider.of<BookProvider>(context);
-    print(bookP);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Library system'),
+        actions: [
+          TextButton.icon(
+            icon: const Icon(Icons.search,
+                color: Color.fromARGB(255, 173, 25, 25)), // Icon
+            label: const Text('Search', style: TextStyle(color: Colors.white)),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SearchPage()),
+              );
+            },
+          ),
+        ],
       ),
       body: ListView.builder(
           itemCount: bookP.books.length,
           itemBuilder: (BuildContext context, int index) {
             return ListTile(
-              title: Text('Title ${bookP.books[index].title}'),
+              title: Text('Title: ${bookP.books[index].title}'),
               subtitle: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
